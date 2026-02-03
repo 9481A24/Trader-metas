@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Simulador Trader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #00ff88;
+        }
+
+        .box {
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background: #00ff88;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>📊 Simulador Trader</h1>
+
+<div class="box">
+
+    <label>Capital Inicial (R$)</label>
+    <input type="number" id="capitalInicial" value="1000">
+
+    <label>Quantidade de Operações</label>
+    <input type="number" id="operacoes" value="200">
+
+    <label>Lucro por Operação (R$)</label>
+    <input type="number" id="lucroOperacao" value="110">
+
+    <label>Aporte Mensal (R$)</label>
+    <input type="number" id="aporteMensal" value="2800">
+
+    <label>Quantidade de Meses</label>
+    <input type="number" id="meses" value="12">
+
+    <button onclick="calcular()">Calcular</button>
+
+    <div class="resultado" id="resultado"></div>
+
+</div>
+
+<script>
+function calcular() {
+    let capitalInicial = Number(document.getElementById("capitalInicial").value);
+    let operacoes = Number(document.getElementById("operacoes").value);
+    let lucroOperacao = Number(document.getElementById("lucroOperacao").value);
+    let aporteMensal = Number(document.getElementById("aporteMensal").value);
+    let meses = Number(document.getElementById("meses").value);
+
+    let lucroTotal = operacoes * lucroOperacao;
+    let totalAportes = aporteMensal * meses;
+    let capitalFinal = capitalInicial + lucroTotal + totalAportes;
+
+    document.getElementById("resultado").innerHTML = `
+        <h3>📈 Resultado da Simulação</h3>
+        <p>Capital Inicial: <b>R$ ${capitalInicial.toLocaleString()}</b></p>
+        <p>Lucro Total das Operações: <b>R$ ${lucroTotal.toLocaleString()}</b></p>
+        <p>Total Aportado: <b>R$ ${totalAportes.toLocaleString()}</b></p>
+        <hr>
+        <p>💰 Capital Final no Trader:</p>
+        <h2 style="color:#00ff88;">R$ ${capitalFinal.toLocaleString()}</h2>
+        <p><i>Todo o lucro foi reinvestido.</i></p>
+    `;
+}
+</script>
+
+</body>
+</html>
